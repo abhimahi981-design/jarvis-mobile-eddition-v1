@@ -1,116 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
 }
 
 body {
-    margin: 0;
-    min-height: 100vh;
-    background: #02070b;
-    color: #00eaff;
-    font-family: Arial, sans-serif;
-    text-align: center;
+    background: #000;
+    color: #0ff;
     padding: 20px;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
 }
 
 header h1 {
-    margin: 10px 0 2px;
     letter-spacing: 6px;
-    font-size: 32px;
+    text-shadow: 0 0 12px #0ff;
 }
 
 header p {
-    margin: 0;
-    color: #6b8790;
+    font-size: 10px;
     letter-spacing: 4px;
-    font-size: 12px;
+    opacity: 0.6;
 }
 
+/* JARVIS CORE */
 .core {
     position: relative;
-    width: 190px;
-    height: 190px;
-    margin: 35px auto 10px;
+    width: 160px;
+    height: 160px;
+    margin: 25px auto;
 }
 
 .ring {
     position: absolute;
-    border: 2px solid #00eaff;
+    border: 2px solid #0ff;
     border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px #00eaff;
+    box-shadow: 0 0 15px #0ff;
 }
 
 .r1 {
-    width: 170px;
-    height: 170px;
-    animation: rotate 8s linear infinite;
+    inset: 0;
+    border-top-color: transparent;
+    animation: spin 3s linear infinite;
 }
 
 .r2 {
-    width: 120px;
-    height: 120px;
-    border-style: dashed;
-    animation: rotateReverse 5s linear infinite;
+    inset: 20px;
+    border-bottom-color: transparent;
+    animation: spin 2s linear infinite reverse;
 }
 
 .center {
     position: absolute;
-    width: 55px;
-    height: 55px;
-    background: #00eaff;
+    inset: 50px;
+    background: #0ff;
     border-radius: 50%;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow:
-        0 0 20px #00eaff,
-        0 0 50px #00eaff;
+    box-shadow: 0 0 30px #0ff;
     animation: pulse 1.5s infinite;
 }
 
-.core-text {
-    letter-spacing: 3px;
-    font-weight: bold;
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.status,
-.chat {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 15px;
-    border: 1px solid #064b59;
-    background: rgba(0, 30, 40, 0.45);
-    border-radius: 12px;
+@keyframes pulse {
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.core-text {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+/* STATUS */
+.status {
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    background: rgba(0, 255, 255, 0.05);
+    padding: 12px;
+    margin: 20px 0;
 }
 
 .status h2 {
-    font-size: 16px;
-    letter-spacing: 3px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
 }
 
 .row {
     display: flex;
     justify-content: space-between;
-    padding: 9px 3px;
-    border-bottom: 1px solid #07323b;
-    font-size: 13px;
+    font-size: 11px;
+    margin: 6px 0;
 }
 
 .on {
-    color: #00ff99;
+    color: #0f0;
 }
 
 .off {
-    color: #ffb000;
+    color: #f00;
 }
 
+/* CHAT */
 .chat {
-    height: 220px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    height: 150px;
     overflow-y: auto;
-    text-align: left;
+    padding: 10px;
+    font-size: 12px;
 }
+
+.msg {
+    margin: 6px 0;
+    padding: 6px;
+    border-left: 2px solid #0ff;
+    background: rgba(0, 255, 255, 0.08);
+}
+
+.msg.user {
+    border-left-color: #fff;
+}
+
+/* INPUT */
+.input-area {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+input {
+    flex: 1;
+    background: #000;
+    border: 1px solid #0ff;
+    color: #0ff;
+    padding: 10px;
+    outline: none;
+}
+
+button {
+    background: #0ff;
+    color: #000;
+    border: none;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    box-shadow: 0 0 15px #0ff;
+}}
 
 .message {
     padding: 10px 12px;
