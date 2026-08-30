@@ -1,112 +1,69 @@
-// J.A.R.V.I.S MOBILE EDITION
-// script.js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J.A.R.V.I.S</title>
 
-const chat = document.getElementById("chat");
-const input = document.getElementById("msg");
-const sendBtn = document.getElementById("send");
+    <link rel="stylesheet" href="style.css">
+</head>
 
-// Add message to chat
-function addMessage(text, sender) {
-    const message = document.createElement("div");
-    message.className = `message ${sender}`;
+<body>
 
-    message.textContent = text;
-    chat.appendChild(message);
+    <header>
+        <h1>J.A.R.V.I.S</h1>
+        <p>MOBILE EDITION</p>
+    </header>
 
-    chat.scrollTop = chat.scrollHeight;
-}
+    <div class="core">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="center"></div>
+    </div>
 
-// J.A.R.V.I.S response engine
-function getResponse(message) {
-    const text = message.toLowerCase().trim();
+    <p class="core-text">CORE ACTIVE</p>
 
-    if (!text) {
-        return "Please provide a command, sir.";
-    }
+    <div class="status">
+        <h2>SYSTEM STATUS</h2>
 
-    if (text.includes("hello") || text.includes("hi")) {
-        return "Good morning, sir. J.A.R.V.I.S is online and ready.";
-    }
+        <div class="row">
+            <span>AI CORE</span>
+            <b class="on">● ONLINE</b>
+        </div>
 
-    if (text.includes("status")) {
-        return "All primary systems are operational. AI Core and Network are ONLINE. Voice and Memory modules remain LOCKED.";
-    }
+        <div class="row">
+            <span>NETWORK</span>
+            <b class="on">● ONLINE</b>
+        </div>
 
-    if (text.includes("who are you") || text.includes("your name")) {
-        return "I am J.A.R.V.I.S — your mobile artificial intelligence assistant.";
-    }
+        <div class="row">
+            <span>VOICE</span>
+            <b class="off">○ LOCKED</b>
+        </div>
 
-    if (text.includes("time")) {
-        return `The current time is ${new Date().toLocaleTimeString()}.`;
-    }
+        <div class="row">
+            <span>MEMORY</span>
+            <b class="off">○ LOCKED</b>
+        </div>
+    </div>
 
-    if (text.includes("date")) {
-        return `Today's date is ${new Date().toLocaleDateString()}.`;
-    }
+    <div class="chat" id="chat">
+        <div class="message jarvis">
+            J.A.R.V.I.S online. How may I assist you, sir?
+        </div>
+    </div>
 
-    if (text.includes("open")) {
-        return "Command recognized. External application control is not connected yet.";
-    }
+    <div class="input-area">
+        <input
+            id="msg"
+            type="text"
+            placeholder="Ask J.A.R.V.I.S..."
+        >
 
-    if (text.includes("memory")) {
-        return "Memory module is currently LOCKED.";
-    }
+        <button id="send">SEND</button>
+    </div>
 
-    if (text.includes("voice")) {
-        return "Voice module is currently LOCKED.";
-    }
+    <script src="script.js"></script>
 
-    if (text.includes("thank")) {
-        return "You're welcome, sir.";
-    }
-
-    if (text.includes("bye") || text.includes("goodbye")) {
-        return "Until next time, sir. J.A.R.V.I.S standing by.";
-    }
-
-    return `Command received: "${message}". I am ready for further instructions, sir.`;
-}
-
-// Send message
-function sendMessage() {
-    const message = input.value.trim();
-
-    if (!message) return;
-
-    addMessage(message, "user");
-
-    input.value = "";
-    input.disabled = true;
-    sendBtn.disabled = true;
-
-    // Typing delay
-    setTimeout(() => {
-        const response = getResponse(message);
-
-        addMessage(response, "jarvis");
-
-        input.disabled = false;
-        sendBtn.disabled = false;
-        input.focus();
-    }, 700);
-}
-
-// Button
-sendBtn.addEventListener("click", sendMessage);
-
-// Enter key
-input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
-});
-
-// Startup message
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        addMessage(
-            "J.A.R.V.I.S online. All available systems initialized. How may I assist you, sir?",
-            "jarvis"
-        );
-    }, 500);
-});
+</body>
+</html>
