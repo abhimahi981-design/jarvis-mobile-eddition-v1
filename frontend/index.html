@@ -1,31 +1,112 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>J.A.R.V.I.S</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
- <header><h1>J.A.R.V.I.S</h1><p>MOBILE EDITION</p></header>
- <div class="core">
- <div class="ring r1"></div>
- <div class="ring r2"></div>
- <div class="center"></div>
- </div>
- <p class="core-text">CORE ACTIVE</p>
- <div class="status">
- <h2>SYSTEM STATUS</h2>
- <div class="row"><span>AI CORE</span><b class="on">● ONLINE</b></div>
- <div class="row"><span>NETWORK</span><b class="on">● ONLINE</b></div>
- <div class="row"><span>VOICE</span><b class="off">○ LOCKED</b></div>
- <div class="row"><span>MEMORY</span><b class="off">○ LOCKED</b></div>
- </div>
- <div class="chat" id="chat"></div>
- <div class="input-area">
- <input id="msg" placeholder="Ask J.A.R.V.I.S...">
- <button id="send">SEND</button>
- </div>
- <script src="script.js"></script>
-</body>
-</html>
+// J.A.R.V.I.S MOBILE EDITION
+// script.js
+
+const chat = document.getElementById("chat");
+const input = document.getElementById("msg");
+const sendBtn = document.getElementById("send");
+
+// Add message to chat
+function addMessage(text, sender) {
+    const message = document.createElement("div");
+    message.className = `message ${sender}`;
+
+    message.textContent = text;
+    chat.appendChild(message);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+// J.A.R.V.I.S response engine
+function getResponse(message) {
+    const text = message.toLowerCase().trim();
+
+    if (!text) {
+        return "Please provide a command, sir.";
+    }
+
+    if (text.includes("hello") || text.includes("hi")) {
+        return "Good morning, sir. J.A.R.V.I.S is online and ready.";
+    }
+
+    if (text.includes("status")) {
+        return "All primary systems are operational. AI Core and Network are ONLINE. Voice and Memory modules remain LOCKED.";
+    }
+
+    if (text.includes("who are you") || text.includes("your name")) {
+        return "I am J.A.R.V.I.S — your mobile artificial intelligence assistant.";
+    }
+
+    if (text.includes("time")) {
+        return `The current time is ${new Date().toLocaleTimeString()}.`;
+    }
+
+    if (text.includes("date")) {
+        return `Today's date is ${new Date().toLocaleDateString()}.`;
+    }
+
+    if (text.includes("open")) {
+        return "Command recognized. External application control is not connected yet.";
+    }
+
+    if (text.includes("memory")) {
+        return "Memory module is currently LOCKED.";
+    }
+
+    if (text.includes("voice")) {
+        return "Voice module is currently LOCKED.";
+    }
+
+    if (text.includes("thank")) {
+        return "You're welcome, sir.";
+    }
+
+    if (text.includes("bye") || text.includes("goodbye")) {
+        return "Until next time, sir. J.A.R.V.I.S standing by.";
+    }
+
+    return `Command received: "${message}". I am ready for further instructions, sir.`;
+}
+
+// Send message
+function sendMessage() {
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    addMessage(message, "user");
+
+    input.value = "";
+    input.disabled = true;
+    sendBtn.disabled = true;
+
+    // Typing delay
+    setTimeout(() => {
+        const response = getResponse(message);
+
+        addMessage(response, "jarvis");
+
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+    }, 700);
+}
+
+// Button
+sendBtn.addEventListener("click", sendMessage);
+
+// Enter key
+input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+});
+
+// Startup message
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        addMessage(
+            "J.A.R.V.I.S online. All available systems initialized. How may I assist you, sir?",
+            "jarvis"
+        );
+    }, 500);
+});
