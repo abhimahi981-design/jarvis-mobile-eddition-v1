@@ -1,59 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>J.A.R.V.I.S</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>J.A.R.V.I.S</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+  color: #00ffff;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+header h1 {
+  font-size: 28px;
+  letter-spacing: 5px;
+  text-shadow:
+    0 0 5px #00ffff,
+    0 0 15px #00ffff;
+}
+
+header p {
+  font-size: 10px;
+  letter-spacing: 4px;
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+/* ARC REACTOR */
+
+.core {
+  width: 160px;
+  height: 160px;
+  position: relative;
+  margin: 30px auto;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border: 3px solid #00ffff;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+.r1 {
+  border-top-color: transparent;
+  animation: spin 3s linear infinite;
+}
+
+.r2 {
+  border-bottom-color: transparent;
+  animation: spin 2s linear infinite reverse;
+}
+
+.center {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #00ffff;
+  box-shadow:
+    0 0 15px #00ffff,
+    0 0 35px #00ffff,
+    0 0 60px #00ffff;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+.core-text {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 25px;
+}
+
+/* STATUS */
+
+.status {
+  border: 1px solid rgba(0,255,255,0.5);
+  padding: 15px;
+  background: rgba(0,255,255,0.05);
+  box-shadow: 0 0 15px rgba(0,255,255,0.1);
+}
+
+.status h2 {
+  font-size: 15px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 13px;
+}
+
+.on {
+  color: #00ff66;
+  text-shadow: 0 0 8px #00ff66;
+}
+
+.off {
+  color: #ff3333;
+}
+
+/* CHAT */
+
+.chat {
+  height: 160px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid rgba(0,255,255,0.5);
+  background: rgba(0,255,255,0.05);
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+.msg {
+  padding: 7px;
+  margin-bottom: 6px;
+  border-left: 2px solid #00ffff;
+}
+
+.msg.user {
+  color: white;
+  border-left-color: white;
+}
+
+/* INPUT */
+
+.input-area {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+#msg {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+  background: #000;
+  color: #00ffff;
+  border: 1px solid #00ffff;
+  outline: none;
+  font-size: 14px;
+}
+
+#msg::placeholder {
+  color: rgba(0,255,255,0.5);
+}
+
+#send {
+  padding: 12px 18px;
+  background: #00ffff;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+#send:active {
+  transform: scale(0.95);
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>J.A.R.V.I.S</h1>
-    <p>MOBILE EDITION</p>
-  </header>
+<header>
+  <h1>J.A.R.V.I.S</h1>
+  <p>MOBILE EDITION</p>
+</header>
 
-  <div class="core">
-    <div class="ring r1"></div>
-    <div class="ring r2"></div>
-    <div class="center"></div>
+<div class="core">
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="center"></div>
+</div>
+
+<p class="core-text">CORE ACTIVE</p>
+
+<div class="status">
+
+  <h2>SYSTEM STATUS</h2>
+
+  <div class="row">
+    <span>AI CORE</span>
+    <b class="on">● ONLINE</b>
   </div>
 
-  <p class="core-text">CORE ACTIVE</p>
-
-  <div class="status">
-    <h2>SYSTEM STATUS</h2>
-
-    <div class="row">
-      <span>AI CORE</span>
-      <b class="on">● ONLINE</b>
-    </div>
-
-    <div class="row">
-      <span>NETWORK</span>
-      <b class="on">● ONLINE</b>
-    </div>
-
-    <div class="row">
-      <span>VOICE</span>
-      <b class="off">● LOCKED</b>
-    </div>
-
-    <div class="row">
-      <span>MEMORY</span>
-      <b class="off">● LOCKED</b>
-    </div>
+  <div class="row">
+    <span>NETWORK</span>
+    <b class="on">● ONLINE</b>
   </div>
 
-  <div class="chat" id="chat"></div>
-
-  <div class="input-area">
-    <input id="msg" type="text" placeholder="Ask J.A.R.V.I.S...">
-    <button id="send">SEND</button>
+  <div class="row">
+    <span>VOICE</span>
+    <b class="off">● LOCKED</b>
   </div>
 
-  <script src="script.js"></script>
+  <div class="row">
+    <span>MEMORY</span>
+    <b class="off">● LOCKED</b>
+  </div>
+
+</div>
+
+<div class="chat" id="chat"></div>
+
+<div class="input-area">
+  <input
+    id="msg"
+    type="text"
+    placeholder="Ask J.A.R.V.I.S..."
+  >
+
+  <button id="send">SEND</button>
+</div>
+
+<script>
+
+const chat = document.getElementById("chat");
+const input = document.getElementById("msg");
+const send = document.getElementById("send");
+
+function addMessage(text, type) {
+
+  const message = document.createElement("div");
+
+  message.className = "msg " + type;
+
+  message.textContent = text;
+
+  chat.appendChild(message);
+
+  chat.scrollTop = chat.scrollHeight;
+
+  return message;
+}
+
+function sendMessage() {
+
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  addMessage("YOU: " + text, "user");
+
+  input.value = "";
+
+  const reply = addMessage(
+    "J.A.R.V.I.S: Processing...",
+    "ai"
+  );
+
+  setTimeout(function() {
+
+    reply.textContent =
+      "J.A.R.V.I.S: Systems online. How may I assist you, Boss?";
+
+  }, 1000);
+}
+
+send.addEventListener("click", sendMessage);
+
+input.addEventListener("keydown", function(event) {
+
+  if (event.key === "Enter") {
+    sendMessage();
+  }
+
+});
+
+</script>
 
 </body>
 </html>
